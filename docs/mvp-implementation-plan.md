@@ -210,13 +210,16 @@ graph TD
 
 ## Estimated Timeline
 
-- **Total Duration**: 15-20 working days
-- **Phase 1**: Days 1-3
-- **Phase 2**: Days 4-7
-- **Phase 3**: Days 8-11
-- **Phase 4**: Days 12-14
-- **Phase 5**: Days 15-18
-- **Phase 6**: Days 19-20
+- **Total Duration**: 15-20 working days (3-4 weeks)
+  - Based on sequential execution with some parallel work streams
+  - Assumes full-time dedicated developers
+  - Includes buffer time for unknowns and iterations
+- **Phase 1 (Foundation)**: Days 1-3 (3 days)
+- **Phase 2 (Protocol Layer)**: Days 4-7 (4 days)
+- **Phase 3 (UI)**: Days 8-11 (4 days)
+- **Phase 4 (Integration)**: Days 12-14 (3 days)
+- **Phase 5 (Testing)**: Days 15-18 (4 days)
+- **Phase 6 (Documentation/Release)**: Days 19-20 (2 days)
 
 ## Success Criteria
 
