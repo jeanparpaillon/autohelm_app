@@ -20,10 +20,12 @@ This Flutter-based mobile app provides a digital interface matching the physical
 - [MVP Implementation Plan](docs/mvp-implementation-plan.md) - Detailed development plan
 - [Issues Breakdown](docs/issues-breakdown.md) - Granular task breakdown
 - [Quick Reference](docs/quick-reference.md) - Quick start guide for developers
+- [Flutter Setup](docs/flutter-setup.md) - Detailed Flutter project structure
+- [Development Guide](DEVELOPMENT.md) - Quick development guide
 
 ## Project Status
 
-🚧 **In Planning Phase** - MVP implementation plan completed
+🚀 **In Development** - Flutter project structure established
 
 See the [MVP Implementation Plan](docs/mvp-implementation-plan.md) for the complete roadmap.
 
@@ -33,7 +35,7 @@ See the [MVP Implementation Plan](docs/mvp-implementation-plan.md) for the compl
 User documentation will be available once the MVP is complete.
 
 ### For Developers
-Developer setup instructions will be available once the project structure is established (see Issue #1).
+See [DEVELOPMENT.md](DEVELOPMENT.md) for setup instructions and development workflow.
 
 ## Contributing
 
