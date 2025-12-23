@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// provider import is reserved for future state management implementation
 
 void main() {
   runApp(const AutohelmApp());

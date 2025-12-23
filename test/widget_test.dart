@@ -7,7 +7,7 @@ void main() {
     await tester.pumpWidget(const AutohelmApp());
 
     // Verify that the app title is displayed.
-    expect(find.text('Autohelm Remote'), findsWidgets);
+    expect(find.text('Autohelm Remote'), findsOneWidget);
     expect(find.text('Autohelm App - Ready for development'), findsOneWidget);
   });
 }
