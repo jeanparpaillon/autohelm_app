@@ -58,7 +58,7 @@ $<Talker ID><Sentence ID>,<Data Field 1>,<Data Field 2>,...,<Data Field N>*<Chec
 ### Example Breakdown
 
 ```
-$GPHDG,270.5,,,0.5,E*2C\r\n
+$GPHDG,270.5,,,0.5,E*30\r\n
 │││└─┬─┘ └─┬─┘ └┬┘└┬┘│ │
 ││└──┘    │    │  │ │ └─ Line terminator (CR+LF)
 ││       │    │  │ └─── Checksum
@@ -80,7 +80,7 @@ The checksum is calculated as an 8-bit XOR of all characters between `$` and `*`
 
 ### Example Calculation
 
-For sentence: `$GPHDG,270.5,,,0.5,E*2C`
+For sentence: `$GPHDG,270.5,,,0.5,E*30`
 
 ```
 Characters: GPHDG,270.5,,,0.5,E
@@ -89,8 +89,8 @@ Checksum calculation:
   'P' (0x50) XOR 0x47 = 0x17
   'H' (0x48) XOR 0x17 = 0x5F
   ... (continue for all characters)
-  Final result: 0x2C
-  Hexadecimal: "2C"
+  Final result: 0x30
+  Hexadecimal: "30"
 ```
 
 ### Validation
@@ -123,7 +123,7 @@ $--HDG,x.x,x.x,a,x.x,a*hh<CR><LF>
 
 **Example:**
 ```
-$HCHDG,270.5,0.0,E,5.5,W*2A
+$HCHDG,270.5,0.0,E,5.5,W*50
 ```
 *Interpretation: Heading 270.5° magnetic, no deviation, 5.5° westerly variation*
 
@@ -142,7 +142,7 @@ $--HDM,x.x,M*hh<CR><LF>
 
 **Example:**
 ```
-$HCHDM,265.0,M*3F
+$HCHDM,265.0,M*28
 ```
 *Interpretation: Heading 265.0° magnetic*
 
@@ -161,7 +161,7 @@ $--HDT,x.x,T*hh<CR><LF>
 
 **Example:**
 ```
-$HCHDT,259.5,T*1B
+$HCHDT,259.5,T*22
 ```
 *Interpretation: Heading 259.5° true*
 
@@ -205,7 +205,7 @@ $--APB,A,A,x.x,a,N,A,A,x.x,a,c--c,x.x,a,x.x,a,a*hh<CR><LF>
 
 **Example:**
 ```
-$GPAPB,A,A,0.10,R,N,V,V,011.5,M,DEST,280.5,M,281.0,M,A*3C
+$GPAPB,A,A,0.10,R,N,V,V,011.5,M,DEST,280.5,M,281.0,M,A*4E
 ```
 
 ### RMB - Recommended Minimum Navigation Information
@@ -219,7 +219,7 @@ $--RMB,A,x.x,a,c--c,c--c,llll.ll,a,yyyyy.yy,a,x.x,x.x,x.x,A,a*hh<CR><LF>
 
 **Example:**
 ```
-$GPRMB,A,0.66,L,003,004,4917.24,N,12309.57,W,001.3,052.5,000.5,V,A*20
+$GPRMB,A,0.66,L,003,004,4917.24,N,12309.57,W,001.3,052.5,000.5,V,A*4D
 ```
 
 ### Proprietary Autopilot Sentences
@@ -527,37 +527,37 @@ $GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47\r\n
 
 #### Example 1: Set Heading to 271° (from 270° +1°)
 ```
-$APHDM,271.0,M*3E\r\n
+$APHDM,271.0,M*37\r\n
 ```
 **Meaning**: Command autopilot to steer to 271.0° magnetic
 
 #### Example 2: Set Heading to 269° (from 270° -1°)
 ```
-$APHDM,269.0,M*38\r\n
+$APHDM,269.0,M*3E\r\n
 ```
 **Meaning**: Command autopilot to steer to 269.0° magnetic
 
 #### Example 3: Set Heading to 280° (from 270° +10°)
 ```
-$APHDM,280.0,M*33\r\n
+$APHDM,280.0,M*39\r\n
 ```
 **Meaning**: Command autopilot to steer to 280.0° magnetic
 
 #### Example 4: Set Heading to 260° (from 270° -10°)
 ```
-$APHDM,260.0,M*3D\r\n
+$APHDM,260.0,M*37\r\n
 ```
 **Meaning**: Command autopilot to steer to 260.0° magnetic
 
 #### Example 5: Wraparound Case - 359° +10° = 9°
 ```
-$APHDM,9.0,M*01\r\n
+$APHDM,9.0,M*3A\r\n
 ```
 **Meaning**: Command autopilot to steer to 9.0° magnetic
 
 #### Example 6: Wraparound Case - 5° -10° = 355°
 ```
-$APHDM,355.0,M*32\r\n
+$APHDM,355.0,M*30\r\n
 ```
 **Meaning**: Command autopilot to steer to 355.0° magnetic
 
@@ -568,22 +568,22 @@ $APHDM,355.0,M*32\r\n
 → TCP Connect to 192.168.4.1:1457
 
 # Gateway sends continuous heading updates
-← $HCHDG,270.0,0.0,E,5.5,W*25\r\n
-← $HCHDG,270.1,0.0,E,5.5,W*24\r\n
-← $HCHDG,270.2,0.0,E,5.5,W*27\r\n
+← $HCHDG,270.0,0.0,E,5.5,W*55\r\n
+← $HCHDG,270.1,0.0,E,5.5,W*54\r\n
+← $HCHDG,270.2,0.0,E,5.5,W*57\r\n
 
 # User presses +10° button
 # App calculates: 270.2 + 10 = 280.2
-→ $APHDM,280.2,M*30\r\n
+→ $APHDM,280.2,M*3B\r\n
 
 # Gateway confirms with updated heading
-← $HCHDG,270.5,0.0,E,5.5,W*20\r\n
-← $HCHDG,272.0,0.0,E,5.5,W*23\r\n
-← $HCHDG,275.5,0.0,E,5.5,W*2F\r\n
-← $HCHDG,278.0,0.0,E,5.5,W*28\r\n
-← $HCHDG,280.0,0.0,E,5.5,W*24\r\n  # Reached target
-← $HCHDG,280.1,0.0,E,5.5,W*25\r\n
-← $HCHDG,280.2,0.0,E,5.5,W*26\r\n  # Stabilized
+← $HCHDG,270.5,0.0,E,5.5,W*50\r\n
+← $HCHDG,272.0,0.0,E,5.5,W*57\r\n
+← $HCHDG,275.5,0.0,E,5.5,W*55\r\n
+← $HCHDG,278.0,0.0,E,5.5,W*5D\r\n
+← $HCHDG,280.0,0.0,E,5.5,W*5A\r\n  # Reached target
+← $HCHDG,280.1,0.0,E,5.5,W*5B\r\n
+← $HCHDG,280.2,0.0,E,5.5,W*58\r\n  # Stabilized
 ```
 
 ## Implementation Examples
@@ -607,7 +607,7 @@ This section provides reference implementations in Rust demonstrating key NMEA01
 /// ```
 /// let sentence = "GPHDG,270.5,,,0.5,E";
 /// let checksum = calculate_checksum(sentence);
-/// assert_eq!(checksum, "2C");
+/// assert_eq!(checksum, "30");
 /// ```
 fn calculate_checksum(sentence: &str) -> String {
     let checksum = sentence
@@ -623,9 +623,9 @@ mod tests {
 
     #[test]
     fn test_checksum_calculation() {
-        assert_eq!(calculate_checksum("GPHDG,270.5,,,0.5,E"), "2C");
-        assert_eq!(calculate_checksum("HCHDM,265.0,M"), "3F");
-        assert_eq!(calculate_checksum("APHDM,280.0,M"), "33");
+        assert_eq!(calculate_checksum("GPHDG,270.5,,,0.5,E"), "30");
+        assert_eq!(calculate_checksum("HCHDM,265.0,M"), "28");
+        assert_eq!(calculate_checksum("APHDM,280.0,M"), "39");
     }
 }
 ```
@@ -690,8 +690,8 @@ mod validation_tests {
 
     #[test]
     fn test_valid_sentences() {
-        assert!(validate_sentence("$HCHDM,265.0,M*3F\r\n").is_ok());
-        assert!(validate_sentence("$HCHDG,270.5,0.0,E,5.5,W*2A\r\n").is_ok());
+        assert!(validate_sentence("$HCHDM,265.0,M*28\r\n").is_ok());
+        assert!(validate_sentence("$HCHDG,270.5,0.0,E,5.5,W*50\r\n").is_ok());
     }
 
     #[test]
@@ -763,9 +763,9 @@ mod parsing_tests {
 
     #[test]
     fn test_parse_valid_hdm() {
-        assert_eq!(parse_hdm_heading("$HCHDM,265.0,M*3F\r\n").unwrap(), 265.0);
-        assert_eq!(parse_hdm_heading("$HCHDM,0.0,M*01\r\n").unwrap(), 0.0);
-        assert_eq!(parse_hdm_heading("$HCHDM,359.9,M*32\r\n").unwrap(), 359.9);
+        assert_eq!(parse_hdm_heading("$HCHDM,265.0,M*28\r\n").unwrap(), 265.0);
+        assert_eq!(parse_hdm_heading("$HCHDM,0.0,M*29\r\n").unwrap(), 0.0);
+        assert_eq!(parse_hdm_heading("$HCHDM,359.9,M*2F\r\n").unwrap(), 359.9);
     }
 
     #[test]
@@ -816,11 +816,11 @@ mod command_tests {
     fn test_build_commands() {
         assert_eq!(
             build_heading_command(280.0).unwrap(),
-            "$APHDM,280.0,M*33\r\n"
+            "$APHDM,280.0,M*39\r\n"
         );
         assert_eq!(
             build_heading_command(0.0).unwrap(),
-            "$APHDM,0.0,M*01\r\n"
+            "$APHDM,0.0,M*33\r\n"
         );
     }
 
@@ -940,6 +940,9 @@ impl NmeaClient {
     }
     
     /// Read next NMEA sentence
+    /// 
+    /// Note: This is a simplified example. In production, the BufReader
+    /// should be stored as a struct field to maintain buffer state.
     fn read_sentence(&mut self) -> Result<String, String> {
         match &self.stream {
             Some(stream) => {
@@ -954,6 +957,11 @@ impl NmeaClient {
     }
     
     /// Adjust course by specified degrees
+    /// 
+    /// Note: This is a simplified example. In production, this should:
+    /// - Filter for HDM/HDG sentences (not assume first sentence)
+    /// - Handle multiple sentence types gracefully
+    /// - Implement proper async reading with buffering
     fn adjust_course(&mut self, adjustment: f64) -> Result<(), String> {
         // Read current heading (simplified - should parse from HDM/HDG)
         let sentence = self.read_sentence()?;
@@ -1029,12 +1037,12 @@ When testing with actual Yacht Device Gateway:
 
 | Button | Current | Adjustment | New | Command |
 |--------|---------|------------|-----|---------|
-| +1° | 270.0 | +1.0 | 271.0 | `$APHDM,271.0,M*3E` |
-| -1° | 270.0 | -1.0 | 269.0 | `$APHDM,269.0,M*38` |
-| +10° | 270.0 | +10.0 | 280.0 | `$APHDM,280.0,M*33` |
-| -10° | 270.0 | -10.0 | 260.0 | `$APHDM,260.0,M*3D` |
-| +10° | 355.0 | +10.0 | 5.0 | `$APHDM,5.0,M*0D` |
-| -10° | 5.0 | -10.0 | 355.0 | `$APHDM,355.0,M*32` |
+| +1° | 270.0 | +1.0 | 271.0 | `$APHDM,271.0,M*37` |
+| -1° | 270.0 | -1.0 | 269.0 | `$APHDM,269.0,M*3E` |
+| +10° | 270.0 | +10.0 | 280.0 | `$APHDM,280.0,M*39` |
+| -10° | 270.0 | -10.0 | 260.0 | `$APHDM,260.0,M*37` |
+| +10° | 355.0 | +10.0 | 5.0 | `$APHDM,5.0,M*36` |
+| -10° | 5.0 | -10.0 | 355.0 | `$APHDM,355.0,M*30` |
 
 ### Connection Checklist
 
